@@ -20,6 +20,11 @@
     align-items: center;
 }
 
+.logo-img {
+    max-width: 100%;
+    height: 48px;
+}
+
 mat-toolbar, mat-toolbar-row{
     min-height: 56px;
     height: 56px;
@@ -54,5 +59,6 @@ mat-toolbar, mat-toolbar-row{
 
 .router-container {
     padding-left: 56px;
+    padding-right: 56px;
     padding-top: 16px;
 }
