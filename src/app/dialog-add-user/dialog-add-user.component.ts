@@ -29,10 +29,11 @@ export class DialogAddUserComponent {
     await addDoc(collection(this.firestore, 'users'), {
       firstName: this.user.firstName,
       lastName: this.user.lastName,
+      email: this.user.email,
       birthDate: this.user.birthDate,
       street: this.user.street,
       zipCode: this.user.zipCode,
-      city: this.user.city
+      city: this.user.city,
     }).then((result) => {
       console.log('Adding user finished', result);
       this.loading = false;

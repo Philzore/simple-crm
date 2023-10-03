@@ -22,7 +22,7 @@ export class UserComponent implements OnInit{
 
   ngOnInit(): void {
     const userRef = collection(this.firestore,'users');
-    this.userDatas$ = collectionData(userRef);
+    this.userDatas$ = collectionData(userRef,{idField: 'customIdName'});
     this.userDatas$.subscribe((changes:any) => {
       console.log('Received changes from DB', changes) ;
       this.allUsers = changes ;
@@ -32,5 +32,6 @@ export class UserComponent implements OnInit{
   openDialog() {
     this.dialog.open(DialogAddUserComponent);
   }
+
 
 }
