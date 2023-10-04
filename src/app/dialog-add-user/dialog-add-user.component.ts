@@ -14,6 +14,7 @@ export class DialogAddUserComponent {
   user: User = new User();
   birthDate: Date;
   loading = false;
+  
 
   firestore: Firestore = inject(Firestore);
 

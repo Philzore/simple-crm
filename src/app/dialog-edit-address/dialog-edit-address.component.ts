@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component,inject } from '@angular/core';
+import { Firestore, doc, updateDoc } from '@angular/fire/firestore';
 import { MatDialogRef } from '@angular/material/dialog';
 import { User } from 'src/models/user.class';
 
@@ -10,11 +11,22 @@ import { User } from 'src/models/user.class';
 export class DialogEditAddressComponent {
   user: User ;
   loading = false ;
+  userId:string;
+  firestore: Firestore = inject(Firestore);
 
   constructor(public dialogRef: MatDialogRef<DialogEditAddressComponent>) {}
 
-  saveUser() {
-
+  async saveUser() {
+    const updateRef = doc(this.firestore, 'users', this.userId);
+    this.loading = true ;
+    await updateDoc(updateRef, {
+      street: this.user.street,
+      zipCode: this.user.zipCode,
+      city: this.user.city,
+    }).then(() => {
+      this.loading = false;
+      this.dialogRef.close();
+    });
   }
 
 }
