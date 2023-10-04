@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { Firestore, doc, getDoc } from '@angular/fire/firestore';
+import { Firestore, doc, getDoc, onSnapshot } from '@angular/fire/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params } from '@angular/router';
 import { User } from 'src/models/user.class';
@@ -14,7 +14,7 @@ import { DialogEditUserComponent } from '../dialog-edit-user/dialog-edit-user.co
 export class UserDetailComponent implements OnInit {
   firestore: Firestore = inject(Firestore);
   userId = '';
-  user: User = new User;
+  user: User = new User();
 
   constructor(private route: ActivatedRoute,public dialog: MatDialog) { }
 
@@ -28,10 +28,10 @@ export class UserDetailComponent implements OnInit {
   }
 
   async getUser() {
-    const docRef = doc(this.firestore, "users", this.userId);
-    const docSnap = await getDoc(docRef);
-    console.log(docSnap.data());
-    this.user = new User(docSnap.data());
+    const unsub = onSnapshot(doc(this.firestore,'users',this.userId),(doc) => {
+      console.log('Daten sind' ,doc.data()) ;
+      this.user = new User(doc.data());
+    });
   }
 
   editUserDetail() {
