@@ -1,6 +1,7 @@
 import { Component,inject } from '@angular/core';
 import { Firestore, doc, updateDoc } from '@angular/fire/firestore';
 import { MatDialogRef } from '@angular/material/dialog';
+import { MatFormField } from '@angular/material/form-field';
 import { User } from 'src/models/user.class';
 
 @Component({
@@ -32,5 +33,5 @@ export class DialogEditUserComponent {
       this.loading = false ;
       this.dialogRef.close();
     });
-  }
+  } 
 }

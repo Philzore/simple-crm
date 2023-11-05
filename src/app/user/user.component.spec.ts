@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UserComponent } from './user.component';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { Firestore } from '@angular/fire/firestore';
 
 describe('UserComponent', () => {
   let component: UserComponent;
@@ -8,7 +10,10 @@ describe('UserComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [UserComponent]
+      imports: [MatDialogModule],
+      declarations: [UserComponent],
+      providers: [{provide : MatDialogRef, useValue: {}},
+        { provide: Firestore, useValue: {} },],
     });
     fixture = TestBed.createComponent(UserComponent);
     component = fixture.componentInstance;
